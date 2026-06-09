@@ -657,28 +657,34 @@ function useScrollNav() {
 
 function useTilt() {
   const cardRefs = useRef([]);
+
   useEffect(() => {
-    const handlers = cardRefs.current.map((card, i) => {
+    const cards = cardRefs.current; // ✅ snapshot ONCE
+
+    const handlers = cards.map((card) => {
       if (!card) return null;
+
       const move = (e) => {
         const r = card.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width)  * 100;
-        const y = ((e.clientY - r.top)  / r.height) * 100;
+        const x = ((e.clientX - r.left) / r.width) * 100;
+        const y = ((e.clientY - r.top) / r.height) * 100;
         card.style.setProperty("--mx", x + "%");
         card.style.setProperty("--my", y + "%");
       };
+
       card.addEventListener("mousemove", move);
       return move;
     });
+
     return () => {
-  const cards = cardRefs.current;
-  cards.forEach((card, i) => {
-    if (card && handlers[i]) {
-      card.removeEventListener("mousemove", handlers[i]);
-    }
-  });
-};
+      cards.forEach((card, i) => {
+        if (card && handlers[i]) {
+          card.removeEventListener("mousemove", handlers[i]);
+        }
+      });
+    };
   }, []);
+
   return cardRefs;
 }
 
@@ -708,13 +714,6 @@ const Hero = () => {
   const tIdx = useRef(0); const cIdx = useRef(0); const del = useRef(false);
 
   useEffect(() => {
-  const titles = [
-    "Full-Stack Developer",
-    "UI/UX Architect",
-    "Creative Coder",
-    "Product Builder"
-  ];
-
   const tick = () => {
     const t = titles[tIdx.current];
 
