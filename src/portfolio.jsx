@@ -671,8 +671,13 @@ function useTilt() {
       return move;
     });
     return () => {
-      cardRefs.current.forEach((card, i) => { if (card && handlers[i]) card.removeEventListener("mousemove", handlers[i]); });
-    };
+  const cards = cardRefs.current;
+  cards.forEach((card, i) => {
+    if (card && handlers[i]) {
+      card.removeEventListener("mousemove", handlers[i]);
+    }
+  });
+};
   }, []);
   return cardRefs;
 }
@@ -703,22 +708,41 @@ const Hero = () => {
   const tIdx = useRef(0); const cIdx = useRef(0); const del = useRef(false);
 
   useEffect(() => {
-    const tick = () => {
-      const t = titles[tIdx.current];
-      if (!del.current) {
-        setTyped(t.slice(0, cIdx.current + 1));
-        cIdx.current++;
-        if (cIdx.current === t.length) { del.current = true; setTimeout(tick, 1800); return; }
-      } else {
-        setTyped(t.slice(0, cIdx.current - 1));
-        cIdx.current--;
-        if (cIdx.current === 0) { del.current = false; tIdx.current = (tIdx.current + 1) % titles.length; }
+  const titles = [
+    "Full-Stack Developer",
+    "UI/UX Architect",
+    "Creative Coder",
+    "Product Builder"
+  ];
+
+  const tick = () => {
+    const t = titles[tIdx.current];
+
+    if (!del.current) {
+      setTyped(t.slice(0, cIdx.current + 1));
+      cIdx.current++;
+
+      if (cIdx.current === t.length) {
+        del.current = true;
+        setTimeout(tick, 1800);
+        return;
       }
-      setTimeout(tick, del.current ? 55 : 95);
-    };
-    const id = setTimeout(tick, 600);
+    } else {
+      setTyped(t.slice(0, cIdx.current - 1));
+      cIdx.current--;
+
+      if (cIdx.current === 0) {
+        del.current = false;
+        tIdx.current = (tIdx.current + 1) % titles.length;
+      }
+    }
+
+    setTimeout(tick, del.current ? 55 : 95);
+  };
+
+  const id = setTimeout(tick, 600);
   return () => clearTimeout(id);
-  }, []);
+}, []);
 
   return (
     <section className="hero" id="hero">
