@@ -707,10 +707,9 @@ const Nav = ({ scrolled }) => (
     <button className="nav-cta">Hire Me</button>
   </nav>
 );
-
+  const titles = ["Full-Stack Developer", "UI/UX Architect", "Creative Coder", "Product Builder"];
 const Hero = () => {
   const [typed, setTyped] = useState("");
-  const titles = ["Full-Stack Developer", "UI/UX Architect", "Creative Coder", "Product Builder"];
   const tIdx = useRef(0); const cIdx = useRef(0); const del = useRef(false);
 
   useEffect(() => {
