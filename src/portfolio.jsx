@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import ecoVideo from "./Assets/Eco-Marche.mp4";
 import lumiereVideo from "./Assets/lumiere.mp4";
 import profilePic from './Assets/1.jpg';
@@ -565,7 +565,7 @@ const PROJECTS = [
 }
 ];
 
-const TESTIMONIALS = [
+/*const TESTIMONIALS = [
   {
     text: "Working with Mortadha was a revelation. The attention to animation detail and performance optimization made our product feel alive. Shipped 3 weeks ahead of schedule.",
     name: "Sophie Martin", role: "CPO @ Orion Labs", color: "#7C3AED",
@@ -578,7 +578,7 @@ const TESTIMONIALS = [
     text: "Our conversion rate jumped 34% after the redesign. Mortadha brought both the UX instinct and the engineering precision to make it real. Extraordinary work.",
     name: "Layla Hassan", role: "Founder @ Bloom Studio", color: "#22c55e",
   },
-];
+];*/
 
 // ─── HOOKS ────────────────────────────────────────────────────────────────────
 function useCursor() {
@@ -717,7 +717,7 @@ const Hero = () => {
       setTimeout(tick, del.current ? 55 : 95);
     };
     const id = setTimeout(tick, 600);
-    return () => clearTimeout(id);
+  return () => clearTimeout(id);
   }, []);
 
   return (
@@ -1272,11 +1272,6 @@ const Contact = () => {
 const Footer = () => (
   <footer>
     <span className="footer-copy">© 2026 Mortadha Boufeden — Built with React & passion</span>
-    <div className="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">RSS</a>
-      <a href="#">Source</a>
-    </div>
   </footer>
 );
 
