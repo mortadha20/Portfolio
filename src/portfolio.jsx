@@ -589,6 +589,7 @@ function useCursor() {
   const raf     = useRef(null);
 
   useEffect(() => {
+        document.title = "Portfolio - Mortadha Boufeden";
     const move = (e) => {
       pos.current = { x: e.clientX, y: e.clientY };
       if (dotRef.current) {
@@ -830,7 +831,7 @@ const About = () => (
 <p>My goal isn't just to write code — it's to understand how things work deeply, stay curious, and never stop improving. Whether I'm learning a new framework, fixing a bug, or deploying a project, I see every moment as a chance to grow.</p>
         </div>
         <div className="about-stats">
-          {[["6","Months ago."],["10+","Projects"]].map(([n,l]) => (
+          {[["6","Months Of Experiences."],["10+","Projects"]].map(([n,l]) => (
             <div className="stat-item" key={l}>
               <div className="stat-num">{n}</div>
               <div className="stat-label">{l}</div>
