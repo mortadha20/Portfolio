@@ -4,7 +4,9 @@ import Portfolio from "./portfolio";
 function App() {
   useEffect(() => {
     if (window.gtag) {
-      window.gtag("config", "G-DVCK86VKK0");
+      window.gtag("event", "page_view", {
+        page_path: window.location.pathname,
+      });
     }
   }, []);
 
